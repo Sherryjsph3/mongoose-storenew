@@ -6,6 +6,7 @@ const methodOverride = require('method-override');
 const mongoose = require ('mongoose');
 const app = express();
 const db = mongoose.connection;
+const dotenv = require('dotenv').config();
 //___________________
 //Port
 //___________________
@@ -35,7 +36,7 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // Connect to Mongo &
 // Fix Depreciation Warnings from Mongoose
 // May or may not need these depending on your Mongoose version
-mongoose.connect('MONGODB_URI' , { 
+mongoose.connect(MONGODB_URI, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
     useFindAndModify: false,
@@ -44,7 +45,7 @@ mongoose.connect('MONGODB_URI' , {
 
 // Error / success
 db.on('error', (error) => console.log(error.message + ' is mongodb not running?'));
-db.on('connected', () => console.log('mongodb connected: ', MONGODB_URI));
+db.on('connected', () => console.log('mongodb connected'));
 db.on('disconnected', () => console.log('mongodb disconnected'));
 
 //___________________
